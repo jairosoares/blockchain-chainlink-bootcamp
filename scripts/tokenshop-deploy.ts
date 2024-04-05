@@ -1,13 +1,19 @@
 import { ethers } from "hardhat";
 
-const ADDRESS_TOKEN_CONTRACT = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const ac = process.env.ADDRESS_CONTRACT;
+if (!ac ) {
+  console.error("ADDRESS_CONTRACT is not defined in .env file");
+  process.exit(1);
+}
+const ADDRESS_CONTRACT = ac;
+
 
 async function main() {
-  const contract = await ethers.deployContract("TokenShop", [ADDRESS_TOKEN_CONTRACT]);
+  const tokenShopContract = await ethers.deployContract("TokenShop", [ADDRESS_CONTRACT]);
 
   console.log("Deploying...");
-  await contract.waitForDeployment();
-  console.log(`Contract deployed to ${contract.target}`);
+  await tokenShopContract.waitForDeployment();
+  console.log(`Contract deployed to ${tokenShopContract.target}`);
   
 }
 

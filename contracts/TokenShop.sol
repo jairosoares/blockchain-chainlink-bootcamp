@@ -13,9 +13,11 @@ contract TokenShop {
     TokenInterface public minter;
     uint256 public tokenPrice = 200; //1 token = 2.00 usd, with 2 decimal places
     address public owner;
+    address public tokenAddress;
 
-    constructor(address tokenAddress) {
-        minter = TokenInterface(tokenAddress);
+    constructor(address _tokenAddress) {
+        minter = TokenInterface(_tokenAddress);
+        tokenAddress = _tokenAddress;
         /**
         * Network: Sepolia
         * Aggregator: ETH/USD
@@ -23,6 +25,10 @@ contract TokenShop {
         */
         priceFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
         owner = msg.sender;
+    }
+
+    function getTokenAddress() view public returns(address) {
+        return tokenAddress;
     }
 
     /**

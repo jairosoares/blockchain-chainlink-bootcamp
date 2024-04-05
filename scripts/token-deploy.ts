@@ -1,12 +1,20 @@
 import { ethers, hardhatArguments } from "hardhat";
 
+
+const a1 = process.env.ACCOUNT_ETH1;
+if ( !a1 ) {
+  console.error("ACCOUNT_ETH1 is not defined in .env file");
+  process.exit(1);
+}
+const ACCOUNT_ETH1 = a1;
+
 async function main() {
   let contract;
   let owner;
   if (hardhatArguments.network === 'localhost') {
     [owner] = await ethers.getSigners();
   }  else {
-    owner = "0xEd3097B280eA1aa9F2A33A307E72467e3121076C"; // Account ETH I
+    owner = ACCOUNT_ETH1; 
   }
   console.log("Running in ", hardhatArguments.network);
 

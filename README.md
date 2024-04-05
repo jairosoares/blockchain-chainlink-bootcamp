@@ -27,11 +27,13 @@ npx hardhat run scripts/register-execute.ts --network localhost
 npx hardhat run scripts/register-access-deploy.ts --network localhost
 npx hardhat run scripts/register-access-execute.ts --network localhost
 
-# ERC20 Token
-npx hardhat run scripts/jsnonce-deploy.ts --network localhost
+1) Deploy the contracts
+npx hardhat run scripts/token-deploy.ts --network localhost
 npx hardhat run scripts/tokenshop-deploy.ts --network localhost
-
-npx hardhat run scripts/jsnonce-execute.ts --network localhost
-npx hardhat run scripts/jsnonce-granthole.ts --network localhost
-
+2) Update .env.ADDRESS_CONTRACT and .env.ADDRESS_TOKEN_SHOP with copy generated address above
+npx hardhat run scripts/token-granthole.ts --network localhost
+npx hardhat run scripts/token-execute.ts --network localhost
+3) Execute token shop tasks
 npx hardhat run scripts/tokenshop-execute.ts --network localhost
+4) Show the balances
+npx hardhat run scripts/balances.ts --network localhost
